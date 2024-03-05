@@ -1,4 +1,4 @@
-#README
+# README
 These are the code questions that Maria forwarded to me. They assume a node environment for running on the command-line.
 
 ## Diagonal Matrix Sum
