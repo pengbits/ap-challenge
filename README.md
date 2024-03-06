@@ -1,0 +1,2 @@
+# README
+This repository contains the requested Coding Assignment. The two algorithm questions and solutions are in [questions](./questions), and there is a simple React todo-list app at [todolist](./todolist).
