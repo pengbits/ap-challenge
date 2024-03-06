@@ -1,5 +1,5 @@
 # README
-These are the code questions that Maria forwarded to me. They assume a node environment for running on the command-line.
+These are the solutions for the two algorithm questions. They assume a node environment for running on the command-line.
 
 ## Diagonal Matrix Sum
 Medium Difficulty: (Do it in a single loop)
