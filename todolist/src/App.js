@@ -1,4 +1,5 @@
 import './App.css';
+
 import { useState } from 'react';
 
 function App() {
@@ -45,7 +46,7 @@ function App() {
   // sort them by numeric value, and increment the last one
   const getNextId = () => {
     const ids = Object.values(todos).map(t => t.id).sort((a,b) => a-b)
-    const nextId = ids.pop() + 1
+    const nextId = ids.length ? ids.pop() + 1 : 1
     return nextId
   }
 
@@ -53,7 +54,11 @@ function App() {
     <div className="App">
       <h1>Todos</h1>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="todoDetail" value={todoDetail} onChange={handleChangeDetail}/>
+        <input type="text" 
+          placeholder="Add your task"
+          onChange={handleChangeDetail} 
+          value={todoDetail} 
+        />
         <input type="submit" />
       </form>
       <ul>{todos.map(t => {
