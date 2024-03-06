@@ -51,6 +51,14 @@ function App() {
   }
 
   const isCompleted = id => todos.find(t => t.id == id).completed
+
+  // return orderd todos with all the completed tasks at the bottom
+  const sortedTodos = () => {
+    const completed   = todos.filter(t => t.completed)
+    const pending     = todos.filter(t => !t.completed)
+    return [...pending, ...completed]
+  }
+
   // return the next id for a new todo
   // we can't just naively increment the id of the last item
   // because if the user deletes todos the id could be repeated
@@ -73,7 +81,7 @@ function App() {
         />
         <input type="submit" />
       </form>
-      <ul className="todos">{todos.map(t => {
+      <ul className="todos">{sortedTodos().map(t => {
         return ( 
           <li key={t.id} className={t.completed ? 'todo completed':'todo'}>
             <input type="checkbox"
