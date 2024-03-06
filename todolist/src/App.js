@@ -6,13 +6,16 @@ function App() {
   
   const initialTodos = [{
     text:'Take Oskar to Dentist',
-    id: 1
+    id: 1,
+    completed:false
   },{
     text:'Get Groceries',
-    id: 3
+    id: 3,
+    completed: false
   },{
     text:'Clean the car',
-    id:2
+    id: 2,
+    completed: false
   }]
   
   let [todos,setTodos ]= useState(initialTodos)
@@ -38,7 +41,16 @@ function App() {
     setTodos(todos.filter(t => t.id !== id))
   }
 
+  const toggleComplete = id => {
+    setTodos(todos.map(todo => {
+      return todo.id !== id ? todo : {
+        ...todo,
+        completed: !todo.completed
+      }
+    }))
+  }
 
+  const isCompleted = id => todos.find(t => t.id == id).completed
   // return the next id for a new todo
   // we can't just naively increment the id of the last item
   // because if the user deletes todos the id could be repeated
@@ -61,11 +73,17 @@ function App() {
         />
         <input type="submit" />
       </form>
-      <ul>{todos.map(t => {
-        return <li key={t.id}>
-          <span>{t.text}</span>{' '}
-          <button onClick={(e) => handleDelete(t.id)}>Delete</button>
-        </li>
+      <ul className="todos">{todos.map(t => {
+        return ( 
+          <li key={t.id} className={t.completed ? 'todo completed':'todo'}>
+            <input type="checkbox"
+              value={isCompleted(t.id)}
+              onChange={e => toggleComplete(t.id)}
+            />
+            <span>{t.text}</span>{' '}
+            <button onClick={(e) => handleDelete(t.id)}>Delete</button>
+          </li>
+        )
       })}</ul>
     </div>
   );
