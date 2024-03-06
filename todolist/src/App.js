@@ -8,10 +8,10 @@ function App() {
     id: 1
   },{
     text:'Get Groceries',
-    id: 2
+    id: 3
   },{
     text:'Clean the car',
-    id:3
+    id:2
   }]
   
   let [todos,setTodos ]= useState(initialTodos)
@@ -19,7 +19,13 @@ function App() {
   
   const handleSubmit = e => {
     e.preventDefault()
-    console.log('handle submit')
+  
+    const nextId = getNextId()
+    setTodos([...todos, {
+      text: todoDetail,
+      id: nextId
+    }])
+    setTodoDetail('')
   }
 
   const handleChangeDetail = e => {
@@ -28,9 +34,20 @@ function App() {
   }
 
   const handleDelete = id => {
-    console.log('delete ' + id)
+    setTodos(todos.filter(t => t.id !== id))
   }
 
+
+  // return the next id for a new todo
+  // we can't just naively increment the id of the last item
+  // because if the user deletes todos the id could be repeated
+  // instead, collect all the ids from todos that are still present,
+  // sort them by numeric value, and increment the last one
+  const getNextId = () => {
+    const ids = Object.values(todos).map(t => t.id).sort((a,b) => a-b)
+    const nextId = ids.pop() + 1
+    return nextId
+  }
 
   return (
     <div className="App">
@@ -48,5 +65,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
